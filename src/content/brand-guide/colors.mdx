@@ -1,0 +1,26 @@
+---
+title: "Brand Colors & Tokens"
+description: "Official color palette system, OKLCH token mappings, and semantic color rules."
+category: "Brand Guidelines"
+order: 1
+tags: ["Design", "Branding", "Colors", "Tailwind"]
+---
+
+import ColorPalette from "@/components/branding/ColorPalette.astro";
+
+# Brand Colors & Token System
+
+Our brand color system is built on **OKLCH color space** for perceptually uniform lightness, consistent contrast ratios, and seamless dark mode adaptability.
+
+## Semantic Palette
+
+Always use semantic Tailwind utility classes rather than raw hex or rgb values. This guarantees high contrast across all lighting modes.
+
+<ColorPalette />
+
+## Usage Guidelines
+
+- **Primary (`var(--primary)`)**: Reserved for main calls-to-action, key badges, active tabs, and primary navigational states.
+- **Secondary (`var(--secondary)`)**: Used for secondary actions, tags, and low-priority pills.
+- **Muted (`var(--muted)`)**: Use for card footers, subtle borders, and muted background stripes.
+- **Surface Contrast**: Always ensure a minimum 4.5:1 WCAG AA contrast ratio for body text against its containing background.

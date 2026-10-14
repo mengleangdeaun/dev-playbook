@@ -1,17 +1,314 @@
 ---
-import Layout from "@/layouts/main.astro"
-import { Button } from "@/components/ui/button"
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const allDocs = await getCollection("docs");
+const allBrand = await getCollection("brand-guide");
+const allBlog = await getCollection("blog");
+const allShowcase = await getCollection("showcase");
+
+// Sort blog posts for recent updates
+allBlog.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const recentPosts = allBlog.slice(0, 2);
 ---
 
-<Layout>
-  <div class="flex min-h-svh p-6">
-    <div class="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-      <div>
-        <h1 class="font-medium">Project ready!</h1>
-        <p>You may now add components and start building.</p>
-        <p>We've already added the button component for you.</p>
-        <Button client:load className="mt-2">Button</Button>
-      </div>
+<BaseLayout
+  title="Dev Playbook | Engineering Standards & Architecture"
+  description="The living developer playbook, architecture decision trees, brand guidelines, and engineering standards."
+>
+  <main class="relative overflow-hidden">
+    {/* Subtle Background Glows */}
+    <div class="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center opacity-40 dark:opacity-20">
+      <div class="h-[550px] w-[550px] -full bg-gradient-to-tr from-teal-400 via-emerald-500 to-sky-600 blur-[130px]"></div>
     </div>
-  </div>
-</Layout>
+
+    {/* Hero Section */}
+    <section class="mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 -full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 backdrop-blur mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+        <span class="w-2 h-2 -full bg-primary animate-pulse"></span>
+        <span>Version 1.0 • Living Architecture &amp; Brand Standards</span>
+      </div>
+
+      <h1 class="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl sm:leading-[1.12]">
+        Build Fast. Ship Clean. <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-teal-500 via-emerald-400 to-cyan-500 bg-clip-text text-transparent">
+          Stay Resiliently Aligned.
+        </span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-base sm:text text-muted-foreground leading-relaxed">
+        The unified engineering hub for our team. Standardizing framework selection, feature-based project architecture, semantic design tokens, and PR definitions of done.
+      </p>
+
+      {/* Hero Action Buttons */}
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/docs/frontend-developer-playbook"
+          class="inline-flex items-center gap-2 px-6 py-3 -xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-95 transition-all hover:scale-[1.02]"
+        >
+          <span>Open Frontend Playbook</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+
+        <a
+          href="/brand/colors"
+          class="inline-flex items-center gap-2 px-6 py-3 -xl bg-card border border-border text-foreground font-semibold text-sm hover:bg-muted/60 transition-all hover:scale-[1.02]"
+        >
+          <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+          <span>Brand Guidelines</span>
+        </a>
+      </div>
+
+      {/* Quick Stats Banner */}
+      <div class="mx-auto mt-16 max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 -2xl border border-border/80 bg-card/60 backdrop-blur">
+        <div class="p-3 text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allDocs.length}</div>
+          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Core Docs &amp; Guides</div>
+        </div>
+        <div class="p-3 text-center border-l border-border/60">
+          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allBrand.length}</div>
+          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Brand Guides</div>
+        </div>
+        <div class="p-3 text-center border-l border-border/60">
+          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allBlog.length}</div>
+          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Articles &amp; Retros</div>
+        </div>
+        <div class="p-3 text-center border-l border-border/60">
+          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allShowcase.length}</div>
+          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Project Showcases</div>
+        </div>
+      </div>
+    </section>
+
+    {/* The 4 Main Pillars Section */}
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-primary">Playbook Architecture</h2>
+        <p class="text-3xl font-extrabold text-foreground mt-2 tracking-tight">Four Pillars of Engineering</p>
+        <p class="text-sm text-muted-foreground mt-2">Everything you need to ship world-class software at high velocity.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Card 1: Docs */}
+        <a
+          href="/docs"
+          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-primary/50 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="w-10 h-10 -xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <h3 class="text font-bold text-foreground group-hover:text-primary transition-colors">
+              Core Technical Docs
+            </h3>
+            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
+              Framework matrix (Vite vs Next vs Astro), colocation patterns, 200-line rule, and PR checklists.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-primary">
+            <span>Browse {allDocs.length} Docs</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+
+        {/* Card 2: Brand Guide */}
+        <a
+          href="/brand"
+          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-amber-500/50 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="w-10 h-10 -xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+            </div>
+            <h3 class="text font-bold text-foreground group-hover:text-amber-500 transition-colors">
+              Brand Guidelines
+            </h3>
+            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
+              Perceptual OKLCH palette tokens, typography scales, Khmer fonts, and vector assets.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-amber-500">
+            <span>Explore Identity</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+
+        {/* Card 3: Tech Blog */}
+        <a
+          href="/blog"
+          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-sky-500/50 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="w-10 h-10 -xl bg-sky-500/10 text-sky-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+            </div>
+            <h3 class="text font-bold text-foreground group-hover:text-sky-500 transition-colors">
+              Tech Blog
+            </h3>
+            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
+              Deep dives, migration retrospectives, code-splitting tips, and engineering reflections.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-sky-500">
+            <span>Read {allBlog.length} Posts</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+
+        {/* Card 4: Showcase */}
+        <a
+          href="/showcase"
+          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-indigo-500/50  transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="w-10 h-10 -xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <h3 class="text font-bold text-foreground group-hover:text-indigo-500 transition-colors">
+              Project Showcase
+            </h3>
+            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
+              Real-world apps and internal systems built adhering to our playbook standards.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-indigo-500">
+            <span>View Projects</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    {/* Decision Matrix Teaser Section */}
+    <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div class="-3xl border border-border bg-gradient-to-b from-card to-background p-6 sm:p-10">
+        <div class="flex flex-col lg:flex-row gap-8 items-start justify-between">
+          <div class="max-w-xl">
+            <span class="text-xs font-bold uppercase tracking-wider text-primary">Key Standard</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-foreground mt-2">
+              The 30-Second Framework Decision Rule
+            </h3>
+            <p class="text-sm text-muted-foreground mt-3 leading-relaxed">
+              Never choose frameworks based on hype or resume building. Match your exact architectural requirement with the proven toolchain:
+            </p>
+
+            <ul class="mt-6 space-y-3 text-xs sm:text-sm text-muted-foreground">
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5  bg-teal-500/10 text-teal-500 flex items-center justify-center shrink-0 font-bold">✓</span>
+                <span><strong class="text-foreground">React (Vite SPA)</strong>: The default for authenticated apps, internal portals, and dashboards behind login.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5  bg-teal-500/10 text-teal-500 flex items-center justify-center shrink-0 font-bold">✓</span>
+                <span><strong class="text-foreground">Next.js (App Router)</strong>: The default for public SaaS, dynamic marketplaces, and rich SEO needs.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5  bg-teal-500/10 text-teal-500 flex items-center justify-center shrink-0 font-bold">✓</span>
+                <span><strong class="text-foreground">Astro</strong>: The default for high-speed documentation, blogs, and marketing sites with Zero-JS by default.</span>
+              </li>
+            </ul>
+
+            <div class="mt-8">
+              <a
+                href="/docs/frontend-developer-playbook#1-framework-selection-matrix"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+              >
+                Read Framework Matrix in Detail
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Code Highlight Snapshot */}
+          <div class="w-full lg:w-96 -2xl border border-border bg-muted/40 p-5 font-mono text-xs">
+            <div class="flex items-center gap-1.5 pb-3 border-b border-border text-muted-foreground text-[11px]">
+              <span class="w-2.5 h-2.5 -full bg-destructive/60"></span>
+              <span class="w-2.5 h-2.5 -full bg-amber-500/60"></span>
+              <span class="w-2.5 h-2.5 -full bg-emerald-500/60"></span>
+              <span class="ml-2">playbook-rules.ts</span>
+            </div>
+            <pre class="pt-4 text-xs leading-relaxed overflow-x-auto text-muted-foreground"><span class="text-purple-400">export const</span> <span class="text-blue-400">coreStandards</span> = &#123;
+  <span class="text-emerald-400">maxComponentLines</span>: <span class="text-amber-400">200</span>,
+  <span class="text-emerald-400">strictTypeScript</span>: <span class="text-amber-400">true</span>,
+  <span class="text-emerald-400">requireZodValidation</span>: <span class="text-amber-400">true</span>,
+  <span class="text-emerald-400">statesRequired</span>: [
+    <span class="text-teal-300">"loading"</span>,
+    <span class="text-teal-300">"empty"</span>,
+    <span class="text-teal-300">"error"</span>,
+    <span class="text-teal-300">"success"</span>
+  ],
+&#125;;</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Recent Articles Teaser */}
+    {recentPosts.length > 0 && (
+      <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-8 pb-3 border-b border-border">
+          <div>
+            <h3 class="text-xl font-bold text-foreground">Latest Engineering Notes</h3>
+            <p class="text-xs text-muted-foreground mt-0.5">Fresh insights from our engineering teams</p>
+          </div>
+          <a href="/blog" class="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
+            All Articles
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {recentPosts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group border border-border/80 bg-card -2xl p-6 hover:border-primary/50 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <span class="text-xs text-muted-foreground">
+                  {post.data.pubDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                </span>
+                <h4 class="text font-bold text-foreground group-hover:text-primary transition-colors mt-1">
+                  {post.data.title}
+                </h4>
+                {post.data.description && (
+                  <p class="text-xs text-muted-foreground mt-2 line-clamp-2 leading-relaxed">
+                    {post.data.description}
+                  </p>
+                )}
+              </div>
+              <div class="mt-4 pt-3 border-t border-border/40 flex items-center justify-between text-xs font-medium text-primary">
+                <span>Read Article</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</BaseLayout>

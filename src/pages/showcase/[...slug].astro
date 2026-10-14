@@ -1,0 +1,95 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/shared/Breadcrumbs.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("showcase");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const breadcrumbs = [
+  { label: "Showcase", href: "/showcase" },
+  { label: project.data.title },
+];
+---
+
+<BaseLayout
+  title={`${project.data.title} | Showcase`}
+  description={project.data.description}
+>
+  <main class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="my-8 pb-8 border-b border-border/80 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 -full text-xs font-semibold bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">
+        Project Case Study
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+        {project.data.title}
+      </h1>
+      {project.data.description && (
+        <p class="text text-muted-foreground leading-relaxed">
+          {project.data.description}
+        </p>
+      )}
+
+      <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-border/50 text-xs">
+        {project.data.client && (
+          <div class="flex items-center gap-1.5 text-muted-foreground">
+            <span class="font-semibold text-foreground">Client:</span>
+            {project.data.client}
+          </div>
+        )}
+        {project.data.link && (
+          <a
+            href={project.data.link}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+          >
+            Visit Live Project
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        )}
+      </div>
+
+      {/* Tech Stack Pills */}
+      {project.data.techStack && project.data.techStack.length > 0 && (
+        <div class="flex flex-wrap gap-2 pt-2">
+          {project.data.techStack.map((tech) => (
+            <span class="px-2.5 py-1  text-xs font-semibold bg-muted text-foreground border border-border">
+              {tech}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <article class="prose prose-slate dark:prose-invert max-w-none 
+      prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+      prose-p:leading-relaxed prose-p:text-muted-foreground
+      prose-ul:list-disc prose-ul:pl-6 prose-li:my-1.5 prose-li:text-muted-foreground">
+      <slot />
+      <Content />
+    </article>
+
+    <div class="mt-12 pt-6 border-t border-border">
+      <a href="/showcase" class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to all projects
+      </a>
+    </div>
+  </main>
+</BaseLayout>

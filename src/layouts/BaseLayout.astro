@@ -1,0 +1,57 @@
+---
+import "@/styles/global.css";
+import Header from "@/components/shared/Header.astro";
+import Footer from "@/components/shared/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title = "Dev Playbook | Engineering Standards & Architecture",
+  description = "Living engineering playbook, frontend architecture standards, brand guidelines, and developer handbook.",
+  showHeader = true,
+  showFooter = true,
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- OpenGraph / Social Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Prevent Theme Flash (FOUC) -->
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (theme === "dark" || (!theme && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
+    {showHeader && <Header currentPath={currentPath} />}
+    
+    <slot />
+
+    {showFooter && <Footer />}
+  </body>
+</html>

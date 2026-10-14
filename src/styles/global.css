@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+@plugin "@tailwindcss/typography";
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -40,8 +42,8 @@
     --color-foreground: var(--foreground);
     --color-background: var(--background);
     --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
+    --radius: calc(var(--radius) * 0.8);
+    --radius: var(--radius);
     --radius-xl: calc(var(--radius) * 1.4);
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
@@ -49,10 +51,9 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
+    --background: oklch(97% 0 0);
     --foreground: oklch(0.148 0.004 228.8);
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.148 0.004 228.8);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.148 0.004 228.8);
     --primary: oklch(0.511 0.096 186.391);

@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from "astro:content";
+import DocLayout from "@/layouts/DocLayout.astro";
+
+export async function getStaticPaths() {
+  const brandEntries = await getCollection("brand-guide");
+  return brandEntries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry, allEntries: brandEntries },
+  }));
+}
+
+const { entry, allEntries } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const sidebarItems = allEntries.map((b) => ({
+  title: b.data.title,
+  slug: b.id,
+  category: b.data.category,
+  order: b.data.order,
+}));
+
+const breadcrumbs = [
+  { label: "Brand Guide", href: "/brand" },
+  { label: entry.data.title },
+];
+---
+
+<DocLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  headings={headings}
+  sidebarItems={sidebarItems}
+  basePath="/brand"
+  currentSlug={entry.id}
+  breadcrumbs={breadcrumbs}
+  category={entry.data.category}
+  tags={entry.data.tags}
+>
+  <Content />
+</DocLayout>

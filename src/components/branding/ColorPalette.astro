@@ -1,0 +1,80 @@
+---
+interface ColorItem {
+  name: string;
+  variable: string;
+  cssVal: string;
+  textClass: string;
+  description: string;
+}
+
+const brandColors: ColorItem[] = [
+  {
+    name: "Primary / Emerald Teal",
+    variable: "--primary",
+    cssVal: "oklch(0.511 0.096 186.391)",
+    textClass: "text-primary-foreground",
+    description: "Core brand accent, primary CTA buttons, active links, and focus rings."
+  },
+  {
+    name: "Background",
+    variable: "--background",
+    cssVal: "oklch(1 0 0) / dark: oklch(0.148 0.004 228.8)",
+    textClass: "text-foreground",
+    description: "Default canvas background surface for light and dark viewports."
+  },
+  {
+    name: "Card & Surfaces",
+    variable: "--card",
+    cssVal: "oklch(1 0 0) / dark: oklch(0.218 0.008 223.9)",
+    textClass: "text-card-foreground",
+    description: "Card panels, floating menus, dialog modals, and tooltips."
+  },
+  {
+    name: "Muted Text & Fill",
+    variable: "--muted",
+    cssVal: "oklch(0.963 0.002 197.1)",
+    textClass: "text-muted-foreground",
+    description: "Subtle backgrounds, table headers, dividers, and disabled states."
+  },
+  {
+    name: "Border & Input",
+    variable: "--border",
+    cssVal: "oklch(0.925 0.005 214.3)",
+    textClass: "text-foreground",
+    description: "Structural borders, cards outlines, and form field boundaries."
+  },
+  {
+    name: "Destructive",
+    variable: "--destructive",
+    cssVal: "oklch(0.577 0.245 27.325)",
+    textClass: "text-white",
+    description: "Critical warnings, deletion confirmations, and destructive alerts."
+  }
+];
+---
+
+<div class="my-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 not-prose">
+  {brandColors.map((color) => (
+    <div class="group border border-border/80 -xl overflow-hidden bg-card/60 backdrop-blur-sm shadow-xs hover:border-primary/50 transition-all hover:shadow">
+      <div 
+        class="h-24 w-full flex items-end p-3 transition-transform group-hover:scale-[1.02]"
+        style={`background-color: var(${color.variable});`}
+      >
+        <span class={`text-xs font-semibold px-2 py-0.5 -full bg-black/40 text-white backdrop-blur-xs`}>
+          {color.variable}
+        </span>
+      </div>
+      <div class="p-3.5 space-y-1">
+        <div class="flex items-center justify-between">
+          <h4 class="font-semibold text-sm text-foreground">{color.name}</h4>
+        </div>
+        <code class="text-xs text-muted-foreground block font-mono bg-muted/60 px-1.5 py-0.5  w-fit">
+          {color.cssVal}
+        </code>
+        <p class="text-xs text-muted-foreground leading-relaxed pt-1">
+          {color.description}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>

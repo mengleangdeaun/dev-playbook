@@ -1,0 +1,27 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="mt-auto border-t border-border/80 bg-background/50 backdrop-blur-sm">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 -full bg-emerald-500 animate-pulse"></span>
+        <span class="font-medium text-foreground">Engineering Playbook</span>
+        <span>•</span>
+        <span>Living standards &amp; guidelines</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="/docs" class="hover:text-foreground transition-colors">Documentation</a>
+        <a href="/brand" class="hover:text-foreground transition-colors">Brand Guide</a>
+        <a href="/blog" class="hover:text-foreground transition-colors">Tech Blog</a>
+        <a href="/showcase" class="hover:text-foreground transition-colors">Showcase</a>
+      </div>
+
+      <div class="text-right">
+        <span>&copy; {currentYear} All rights reserved.</span>
+      </div>
+    </div>
+  </div>
+</footer>
