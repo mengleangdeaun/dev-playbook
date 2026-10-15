@@ -5,6 +5,8 @@ techStack: ["React 19", "Vite", "TanStack Query", "Tailwind CSS", "Shadcn UI", "
 client: "Internal Operations"
 link: "https://crm.internal.example.com"
 featured: true
+image: "/assets/images/showcase/crm-platform.svg"
+tags: ["React 19", "Vite", "TanStack Query", "Tailwind CSS", "Architecture"]
 ---
 
 # Enterprise Sales & CRM Platform

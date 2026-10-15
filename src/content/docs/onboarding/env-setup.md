@@ -6,6 +6,7 @@ order: 1
 tags: ["Onboarding", "Node.js", "Git", "VSCode", "npm"]
 author: "Engineering Operations"
 lastUpdated: "2026-10-14"
+cover: "/assets/images/docs/env-setup-cover.svg"
 ---
 
 # Developer Environment Setup

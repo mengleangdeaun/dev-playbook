@@ -34,7 +34,7 @@ const breadcrumbs = [
       {tags.length > 0 && (
         <div class="flex flex-wrap items-center gap-2">
           {tags.map((tag) => (
-            <span class="px-2.5 py-0.5 -full text-xs font-semibold bg-sky-500/10 text-sky-500 border border-sky-500/20">
+            <span class="px-2.5 py-0.5 text-xs font-semibold bg-card border border-border/50">
               #{tag}
             </span>
           ))}
@@ -53,7 +53,7 @@ const breadcrumbs = [
 
       <div class="flex items-center gap-4 pt-4 text-xs text-muted-foreground border-t border-border/40">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 -full bg-gradient-to-tr from-primary to-emerald-400 flex items-center justify-center text-white font-bold text-xs shadow-xs">
+          <div class="w-8 h-8 -full bg-linear-to-tr from-primary to-emerald-400 flex items-center justify-center text-white font-bold text-xs shadow-xs">
             {author.charAt(0)}
           </div>
           <span class="font-medium text-foreground">{author}</span>

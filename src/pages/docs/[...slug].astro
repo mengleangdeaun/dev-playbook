@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import DocLayout from "@/layouts/DocLayout.astro";
 
 export async function getStaticPaths() {
@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 const { doc, allDocs } = Astro.props;
 const { Content, headings } = await render(doc);
 
+// Sidebar items
 const sidebarItems = allDocs.map((d) => ({
   title: d.data.title,
   slug: d.id,
@@ -20,11 +21,24 @@ const sidebarItems = allDocs.map((d) => ({
   order: d.data.order,
 }));
 
+// Breadcrumbs
 const breadcrumbs = [
   { label: "Docs", href: "/docs" },
   { label: doc.data.category || "General" },
   { label: doc.data.title },
 ];
+
+// Skill — fetch linked skill entry if skillFile is set
+let skillEntry: Awaited<ReturnType<typeof getEntry>> | undefined;
+if (doc.data.skillFile) {
+  skillEntry = await getEntry("skill", doc.data.skillFile);
+}
+
+// Tag counts — how many docs share each tag on this doc
+const tagCounts: Record<string, number> = {};
+for (const tag of doc.data.tags ?? []) {
+  tagCounts[tag] = allDocs.filter((d) => d.data.tags?.includes(tag)).length;
+}
 ---
 
 <DocLayout
@@ -39,6 +53,13 @@ const breadcrumbs = [
   tags={doc.data.tags}
   author={doc.data.author}
   lastUpdated={doc.data.lastUpdated}
+  rawMarkdown={doc.body}
+  skillName={skillEntry?.data.name}
+  skillDescription={skillEntry?.data.description}
+  skillBody={skillEntry?.body}
+  cover={doc.data.cover}
+  assets={doc.data.assets}
+  tagCounts={tagCounts}
 >
   <Content />
 </DocLayout>

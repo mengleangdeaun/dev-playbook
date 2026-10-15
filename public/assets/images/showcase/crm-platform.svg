@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="crm-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#091428"/>
+      <stop offset="60%" stop-color="#0f1f3d"/>
+      <stop offset="100%" stop-color="#060c18"/>
+    </linearGradient>
+    <radialGradient id="crm-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#crm-bg)"/>
+
+  <!-- Glow -->
+  <circle cx="850" cy="300" r="340" fill="url(#crm-glow)"/>
+
+  <!-- Enterprise UI Mockup -->
+  <g transform="translate(560, 100)">
+    <rect width="560" height="420" rx="16" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+    <!-- App Header -->
+    <rect width="560" height="54" rx="16" fill="#0f172a"/>
+    <circle cx="30" cy="27" r="6" fill="#ef4444"/>
+    <circle cx="50" cy="27" r="6" fill="#f59e0b"/>
+    <circle cx="70" cy="27" r="6" fill="#10b981"/>
+    <rect x="110" y="16" width="220" height="22" rx="6" fill="#1e293b"/>
+    <text x="125" y="32" font-family="Inter, sans-serif" font-size="11" fill="#64748b">https://crm.internal.example.com</text>
+
+    <!-- KPI Cards Row -->
+    <g transform="translate(30, 80)">
+      <rect width="150" height="80" rx="10" fill="#0f172a" stroke="#1e293b"/>
+      <text x="16" y="30" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8">Active Orders</text>
+      <text x="16" y="60" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">1,482</text>
+    </g>
+    <g transform="translate(195, 80)">
+      <rect width="150" height="80" rx="10" fill="#0f172a" stroke="#1e293b"/>
+      <text x="16" y="30" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8">Branch Inventory</text>
+      <text x="16" y="60" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#38bdf8">99.4%</text>
+    </g>
+    <g transform="translate(360, 80)">
+      <rect width="140" height="80" rx="10" fill="#0f172a" stroke="#1e293b"/>
+      <text x="16" y="30" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8">Throughput</text>
+      <text x="16" y="60" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#34d399">12.4k/s</text>
+    </g>
+
+    <!-- Virtualized Data Table Preview -->
+    <g transform="translate(30, 185)">
+      <rect width="500" height="190" rx="10" fill="#0f172a" stroke="#1e293b"/>
+      <line x1="0" y1="40" x2="500" y2="40" stroke="#1e293b"/>
+      <line x1="0" y1="90" x2="500" y2="90" stroke="#1e293b"/>
+      <line x1="0" y1="140" x2="500" y2="140" stroke="#1e293b"/>
+      <text x="20" y="26" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#64748b">ORDER ID</text>
+      <text x="130" y="26" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#64748b">CLIENT</text>
+      <text x="280" y="26" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#64748b">BRANCH</text>
+      <text x="400" y="26" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#64748b">STATUS</text>
+
+      <!-- Row 1 -->
+      <text x="20" y="70" font-family="monospace" font-size="12" fill="#f8fafc">#ORD-9842</text>
+      <text x="130" y="70" font-family="Inter, sans-serif" font-size="12" fill="#cbd5e1">Siam Commercial</text>
+      <text x="280" y="70" font-family="Inter, sans-serif" font-size="12" fill="#94a3b8">BKK-Central</text>
+      <rect x="400" y="54" width="70" height="22" rx="6" fill="#10b981" fill-opacity="0.15"/>
+      <text x="412" y="69" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#34d399">Allocated</text>
+
+      <!-- Row 2 -->
+      <text x="20" y="120" font-family="monospace" font-size="12" fill="#f8fafc">#ORD-9843</text>
+      <text x="130" y="120" font-family="Inter, sans-serif" font-size="12" fill="#cbd5e1">Toyota Leasing</text>
+      <text x="280" y="120" font-family="Inter, sans-serif" font-size="12" fill="#94a3b8">BKK-North</text>
+      <rect x="400" y="104" width="70" height="22" rx="6" fill="#3b82f6" fill-opacity="0.15"/>
+      <text x="415" y="119" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#60a5fa">In Route</text>
+    </g>
+  </g>
+
+  <!-- Left Content -->
+  <g transform="translate(80, 160)">
+    <rect x="0" y="0" width="170" height="34" rx="17" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-opacity="0.4"/>
+    <circle cx="18" cy="17" r="5" fill="#3b82f6"/>
+    <text x="34" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#60a5fa" letter-spacing="1.5">ENTERPRISE CRM</text>
+
+    <text x="0" y="85" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#f8fafc" letter-spacing="-1">
+      Sales &amp; Operations
+    </text>
+    <text x="0" y="135" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#60a5fa" letter-spacing="-1">
+      Management System
+    </text>
+    <text x="0" y="190" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" fill="#94a3b8">
+      React 19, TanStack Query, and virtualized enterprise tables.
+    </text>
+  </g>
+</svg>

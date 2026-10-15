@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="ts-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a1224"/>
+      <stop offset="60%" stop-color="#101f3d"/>
+      <stop offset="100%" stop-color="#050a14"/>
+    </linearGradient>
+    <radialGradient id="ts-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3178c6" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#3178c6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#ts-bg)"/>
+  <circle cx="850" cy="300" r="320" fill="url(#ts-glow)"/>
+
+  <!-- TypeScript Code Card Right -->
+  <g transform="translate(600, 100)">
+    <rect width="500" height="420" rx="16" fill="#0f172a" stroke="#1e3a5f" stroke-width="2"/>
+    <rect width="500" height="45" rx="16" fill="#1e293b"/>
+    <text x="30" y="28" font-family="monospace" font-size="13" font-weight="700" fill="#3178c6">strict: true • noUncheckedIndexedAccess</text>
+
+    <!-- Code Block -->
+    <text x="30" y="85" font-family="monospace" font-size="13" fill="#64748b">// Explicit discriminated union vs any</text>
+    <text x="30" y="115" font-family="monospace" font-size="13" fill="#f43f5e"><tspan fill="#38bdf8">type</tspan> Result&lt;T&gt; =</text>
+    <text x="50" y="145" font-family="monospace" font-size="13" fill="#cbd5e1">| { status: <tspan fill="#4ade80">'success'</tspan>; data: T }</text>
+    <text x="50" y="175" font-family="monospace" font-size="13" fill="#cbd5e1">| { status: <tspan fill="#f43f5e">'error'</tspan>; error: Error };</text>
+
+    <text x="30" y="225" font-family="monospace" font-size="13" fill="#64748b">// Zero 'as unknown as T' assertions</text>
+    <text x="30" y="255" font-family="monospace" font-size="13" fill="#38bdf8">function <tspan fill="#facc15">assertValidPayload</tspan>&lt;T&gt;(</text>
+    <text x="50" y="285" font-family="monospace" font-size="13" fill="#cbd5e1">val: unknown</text>
+    <text x="30" y="315" font-family="monospace" font-size="13" fill="#38bdf8">): asserts val is T &#123; ... &#125;</text>
+
+    <rect x="30" y="345" width="440" height="45" rx="8" fill="#1e293b"/>
+    <text x="45" y="373" font-family="monospace" font-size="12" fill="#4ade80">✓ 100% strict type safety across client &amp; server</text>
+  </g>
+
+  <!-- Left Content -->
+  <g transform="translate(100, 160)">
+    <rect x="0" y="0" width="180" height="34" rx="17" fill="#3178c6" fill-opacity="0.15" stroke="#3178c6" stroke-opacity="0.4"/>
+    <circle cx="18" cy="17" r="5" fill="#3178c6"/>
+    <text x="34" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#60a5fa" letter-spacing="1.5">TYPE SAFETY</text>
+    <text x="0" y="85" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#f8fafc" letter-spacing="-1">TypeScript Best Practices</text>
+    <text x="0" y="135" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#60a5fa" letter-spacing="-1">&amp; Standards</text>
+    <text x="0" y="190" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" fill="#94a3b8">Strict typing conventions, generic constraints, and zero any.</text>
+  </g>
+</svg>

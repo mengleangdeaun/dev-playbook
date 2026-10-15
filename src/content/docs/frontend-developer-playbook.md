@@ -6,6 +6,7 @@ order: 1
 tags: ["Architecture", "React", "Astro", "Next.js", "Standards"]
 author: "Frontend Core Team"
 lastUpdated: "2026-10-14"
+cover: "/assets/images/docs/frontend-playbook-cover.svg"
 ---
 
 # Frontend Engineering Playbook

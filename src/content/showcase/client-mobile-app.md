@@ -5,6 +5,8 @@ techStack: ["React Native", "Expo", "Zustand", "SQLite", "Tailwind CSS"]
 client: "Global Logistics Ltd"
 link: "https://apps.apple.com"
 featured: true
+image: "/assets/images/showcase/mobile-app.svg"
+tags: ["React Native", "Expo", "Zustand", "SQLite", "Tailwind CSS"]
 ---
 
 # Omnichannel Logistics Mobile App

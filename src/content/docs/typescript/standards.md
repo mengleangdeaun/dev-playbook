@@ -6,6 +6,7 @@ order: 2
 tags: ["TypeScript", "Types", "Standards"]
 author: "Frontend Core Team"
 lastUpdated: "2026-10-14"
+cover: "/assets/images/docs/typescript-standards-cover.svg"
 ---
 
 # TypeScript Best Practices

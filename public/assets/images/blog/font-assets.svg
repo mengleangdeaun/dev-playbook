@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="fa-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#190e14"/>
+      <stop offset="60%" stop-color="#260f1e"/>
+      <stop offset="100%" stop-color="#0a050c"/>
+    </linearGradient>
+    <radialGradient id="fa-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f43f5e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#fa-bg)"/>
+  <circle cx="850" cy="300" r="320" fill="url(#fa-glow)"/>
+
+  <!-- Typography Diagram Right -->
+  <g transform="translate(620, 120)">
+    <rect width="480" height="380" rx="20" fill="#240c1b" stroke="#4c1d39" stroke-width="2"/>
+    <text x="30" y="45" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#fb7185" letter-spacing="1">SELF-HOSTED VARIABLE FONTS</text>
+
+    <!-- Huge Aa -->
+    <text x="50" y="170" font-family="Inter, sans-serif" font-size="110" font-weight="900" fill="#f43f5e">Aa</text>
+    <text x="210" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#ffe4e6">Inter Variable Font</text>
+    <text x="210" y="125" font-family="monospace" font-size="12" fill="#fda4af">font-display: swap;</text>
+    <text x="210" y="150" font-family="monospace" font-size="12" fill="#fda4af">weight: 100 900;</text>
+
+    <!-- Comparison -->
+    <rect x="30" y="210" width="420" height="60" rx="10" fill="#4c0519"/>
+    <text x="50" y="245" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#fecdd3">Single .woff2 file replaces 8 static font files</text>
+
+    <rect x="30" y="290" width="420" height="60" rx="10" fill="#881337" fill-opacity="0.3"/>
+    <text x="50" y="325" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#fb7185">✓ Zero Google Fonts layout shifting (FOUT/FOIT)</text>
+  </g>
+
+  <!-- Left Content -->
+  <g transform="translate(100, 160)">
+    <rect x="0" y="0" width="160" height="34" rx="17" fill="#f43f5e" fill-opacity="0.15" stroke="#f43f5e" stroke-opacity="0.4"/>
+    <circle cx="18" cy="17" r="5" fill="#f43f5e"/>
+    <text x="34" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#fb7185" letter-spacing="1.5">TYPOGRAPHY</text>
+    <text x="0" y="85" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#f8fafc" letter-spacing="-1">Font Assets &amp; Web Fonts</text>
+    <text x="0" y="135" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#fb7185" letter-spacing="-1">Performance Guide</text>
+    <text x="0" y="190" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" fill="#94a3b8">WOFF2 self-hosting, font subsetting, and zero layout shift.</text>
+  </g>
+</svg>

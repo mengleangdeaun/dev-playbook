@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+      .font-inter {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+    </style>
+
+    <!-- Deep flat dark slate background -->
+    <linearGradient id="fp-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#020b0d"/>
+      <stop offset="60%" stop-color="#051417"/>
+      <stop offset="100%" stop-color="#010608"/>
+    </linearGradient>
+
+    <!-- Super fine architectural blueprint grid -->
+    <pattern id="fp-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <!-- Background and Grid -->
+  <rect width="1200" height="630" fill="url(#fp-bg)"/>
+  <rect width="1200" height="630" fill="url(#fp-grid)"/>
+
+  <!-- Border Hairline Framing -->
+  <line x1="20" y1="30" x2="1180" y2="30" stroke="#134e4a" stroke-width="1" stroke-opacity="0.3"/>
+  <line x1="20" y1="600" x2="1180" y2="600" stroke="#134e4a" stroke-width="1" stroke-opacity="0.3"/>
+  <line x1="30" y1="20" x2="30" y2="610" stroke="#134e4a" stroke-width="1" stroke-opacity="0.3"/>
+  <line x1="1170" y1="20" x2="1170" y2="610" stroke="#134e4a" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- Horizontal divider extending between panels -->
+  <line x1="535" y1="30" x2="535" y2="600" stroke="#134e4a" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="2 4"/>
+
+  <!-- ================= LEFT: REFINED TITLE & METADATA ================= -->
+  <g transform="translate(65, 90)" class="font-inter">
+    <!-- Clean Tag/Badge (No rx) -->
+    <rect x="0" y="0" width="180" height="34" fill="#042f2e" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.7"/>
+    <rect x="0" y="0" width="4" height="34" fill="#2dd4bf"/>
+    <rect x="14" y="13" width="8" height="8" fill="#2dd4bf"/>
+    <text x="32" y="21" font-size="12" font-weight="700" fill="#2dd4bf" letter-spacing="1">CORE STANDARDS</text>
+
+    <!-- Natural Heading using Medium-to-SemiBold weights -->
+    <text x="0" y="125" font-size="56" font-weight="700" fill="#f8fafc" letter-spacing="-1.5">Frontend</text>
+    <text x="0" y="195" font-size="56" font-weight="700" fill="#f8fafc" letter-spacing="-1.5">Engineering</text>
+    <text x="0" y="265" font-size="56" font-weight="700" fill="#2dd4bf" letter-spacing="-1.5">Playbook</text>
+
+    <!-- Description in light-slate, standard readable weight -->
+    <text x="0" y="325" font-size="19" font-weight="400" fill="#94a3b8" letter-spacing="-0.2">The definitive guide to structure, state, and DoD checklists</text>
+
+    <!-- Structural Hairline & Specs -->
+    <line x1="0" y1="380" x2="415" y2="380" stroke="#134e4a" stroke-width="1" stroke-opacity="0.6"/>
+
+    <!-- Left side Info Grid (No Bold) -->
+    <g transform="translate(0, 415)">
+      <text x="0" y="0" font-size="10" font-weight="600" fill="#475569" letter-spacing="1">ARCHITECTURE</text>
+      <text x="0" y="20" font-size="14" font-weight="500" fill="#94a3b8">Modular &amp; Strict</text>
+
+      <text x="150" y="0" font-size="10" font-weight="600" fill="#475569" letter-spacing="1">TYPE SAFETY</text>
+      <text x="150" y="20" font-size="14" font-weight="500" fill="#2dd4bf">100% Checked</text>
+
+      <text x="290" y="0" font-size="10" font-weight="600" fill="#475569" letter-spacing="1">LAYOUT SHIFT</text>
+      <text x="290" y="20" font-size="14" font-weight="500" fill="#2dd4bf">0.00 CLS</text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT: BREADBOARD GRAPHIC ================= -->
+  <g transform="translate(585, 75)" class="font-inter">
+    <!-- Outer sharp structural box -->
+    <rect width="520" height="480" fill="#041215" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.4"/>
+    
+    <!-- Crosshairs for geometric flair (Corners) -->
+    <path d="M 0 10 L 0 0 L 10 0" stroke="#2dd4bf" stroke-width="1.5"/>
+    <path d="M 510 0 L 520 0 L 520 10" stroke="#2dd4bf" stroke-width="1.5"/>
+    <path d="M 0 470 L 0 480 L 10 480" stroke="#2dd4bf" stroke-width="1.5"/>
+    <path d="M 510 480 L 520 480 L 520 470" stroke="#2dd4bf" stroke-width="1.5"/>
+
+    <!-- Minimal Header Text on upper alignment line -->
+    <text x="25" y="32" font-size="11" font-weight="700" fill="#14b8a6" letter-spacing="1">PLAYBOOK ARCHITECTURE</text>
+    <line x1="0" y1="48" x2="520" y2="48" stroke="#134e4a" stroke-width="1" stroke-opacity="0.4"/>
+
+    <!-- Component Tier 01 -->
+    <g transform="translate(25, 76)">
+      <rect width="470" height="88" fill="#06191c" stroke="#134e4a" stroke-width="1"/>
+      <rect width="3" height="88" fill="#2dd4bf"/>
+      
+      <!-- Index Label Frame (No rx) -->
+      <rect x="20" y="20" width="36" height="48" fill="#032124" stroke="#134e4a" stroke-width="1"/>
+      <text x="38" y="49" font-size="15" font-weight="600" fill="#2dd4bf" text-anchor="middle">01</text>
+
+      <text x="76" y="38" font-size="18" font-weight="600" fill="#f8fafc">Framework &amp; Build Tier</text>
+      <text x="76" y="60" font-size="13" font-weight="400" fill="#5eead4">Vite SPA • Astro SSG • Next.js Hybrid</text>
+    </g>
+
+    <!-- Connector Tier 1 -> 2 -->
+    <line x1="260" y1="164" x2="260" y2="188" stroke="#14b8a6" stroke-width="1" stroke-dasharray="2 3" stroke-opacity="0.4"/>
+
+    <!-- Component Tier 02 -->
+    <g transform="translate(25, 188)">
+      <rect width="470" height="88" fill="#06191c" stroke="#134e4a" stroke-width="1"/>
+      <rect width="3" height="88" fill="#14b8a6"/>
+
+      <!-- Index Label Frame -->
+      <rect x="20" y="20" width="36" height="48" fill="#032124" stroke="#134e4a" stroke-width="1"/>
+      <text x="38" y="49" font-size="15" font-weight="600" fill="#14b8a6" text-anchor="middle">02</text>
+
+      <text x="76" y="38" font-size="18" font-weight="600" fill="#f8fafc">State &amp; Data Pipeline</text>
+      <text x="76" y="60" font-size="13" font-weight="400" fill="#5eead4">TanStack Query • Zustand UI Buckets</text>
+    </g>
+
+    <!-- Connector Tier 2 -> 3 -->
+    <line x1="260" y1="276" x2="260" y2="300" stroke="#14b8a6" stroke-width="1" stroke-dasharray="2 3" stroke-opacity="0.4"/>
+
+    <!-- Component Tier 03 -->
+    <g transform="translate(25, 300)">
+      <rect width="470" height="88" fill="#06191c" stroke="#134e4a" stroke-width="1"/>
+      <rect width="3" height="88" fill="#0d9488"/>
+
+      <!-- Index Label Frame -->
+      <rect x="20" y="20" width="36" height="48" fill="#032124" stroke="#134e4a" stroke-width="1"/>
+      <text x="38" y="49" font-size="15" font-weight="600" fill="#0d9488" text-anchor="middle">03</text>
+
+      <text x="76" y="38" font-size="18" font-weight="600" fill="#f8fafc">Design Tokens &amp; Polish</text>
+      <text x="76" y="60" font-size="13" font-weight="400" fill="#5eead4">Tailwind v4 • Shadcn • Motion Standards</text>
+    </g>
+
+    <!-- Anchor DOD Footer -->
+    <g transform="translate(25, 412)">
+      <rect width="470" height="44" fill="#042f2e" fill-opacity="0.6" stroke="#14b8a6" stroke-width="1"/>
+      <rect x="15" y="15" width="14" height="14" fill="#2dd4bf" fill-opacity="0.2" stroke="#2dd4bf" stroke-width="1"/>
+      <rect x="20" y="20" width="4" height="4" fill="#2dd4bf"/>
+      <text x="42" y="27" font-size="13" font-weight="700" fill="#2dd4bf" letter-spacing="1">DoD FOCUS:</text>
+      <text x="132" y="27" font-size="13" font-weight="500" fill="#e2e8f0">100% Type Checked, 0 CLS</text>
+    </g>
+  </g>
+</svg>

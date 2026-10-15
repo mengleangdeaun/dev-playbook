@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="bi-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0e0f19"/>
+      <stop offset="60%" stop-color="#181329"/>
+      <stop offset="100%" stop-color="#070710"/>
+    </linearGradient>
+    <radialGradient id="bi-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bi-bg)"/>
+  <circle cx="850" cy="300" r="320" fill="url(#bi-glow)"/>
+
+  <!-- Brand Graphics Right -->
+  <g transform="translate(620, 120)">
+    <rect width="480" height="380" rx="20" fill="#1e1b2e" stroke="#3b2d54" stroke-width="2"/>
+    <rect x="40" y="40" width="180" height="130" rx="14" fill="#2d1b4e" stroke="#a855f7"/>
+    <circle cx="130" cy="95" r="30" fill="#c084fc"/>
+    <text x="130" y="145" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#e9d5ff" text-anchor="middle">Brand Monogram</text>
+
+    <rect x="260" y="40" width="180" height="130" rx="14" fill="#2d1b4e" stroke="#a855f7"/>
+    <rect x="315" y="70" width="70" height="50" rx="8" stroke="#c084fc" stroke-width="3" fill="none"/>
+    <text x="350" y="145" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#e9d5ff" text-anchor="middle">Favicon Pipeline</text>
+
+    <rect x="40" y="200" width="400" height="140" rx="14" fill="#140f24" stroke="#4c1d95"/>
+    <text x="60" y="240" font-family="monospace" font-size="13" fill="#c084fc">export const BrandAssets = {</text>
+    <text x="80" y="270" font-family="monospace" font-size="12" fill="#e9d5ff">logo: "/assets/brand/logo.svg",</text>
+    <text x="80" y="295" font-family="monospace" font-size="12" fill="#e9d5ff">monogram: "/assets/brand/monogram.svg",</text>
+    <text x="60" y="320" font-family="monospace" font-size="13" fill="#c084fc">};</text>
+  </g>
+
+  <!-- Left Content -->
+  <g transform="translate(100, 160)">
+    <rect x="0" y="0" width="170" height="34" rx="17" fill="#a855f7" fill-opacity="0.15" stroke="#a855f7" stroke-opacity="0.4"/>
+    <circle cx="18" cy="17" r="5" fill="#a855f7"/>
+    <text x="34" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#c084fc" letter-spacing="1.5">ASSET PIPELINE</text>
+    <text x="0" y="85" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#f8fafc" letter-spacing="-1">Brand &amp; Icon Assets</text>
+    <text x="0" y="135" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#c084fc" letter-spacing="-1">Architecture Guide</text>
+    <text x="0" y="190" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" fill="#94a3b8">Consistent logos, favicons, and vector branding across platforms.</text>
+  </g>
+</svg>

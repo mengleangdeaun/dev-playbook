@@ -1,0 +1,114 @@
+---
+interface Props {
+  tag: string;
+  /** How many items in the current section have this tag */
+  count?: number;
+  /** Which section this tag belongs to, used to build the filter URL */
+  section?: "docs" | "blog" | "showcase";
+  /** If true, links to cross-section search /tags/[slug] instead of current section ?tag= */
+  crossSection?: boolean;
+  /** If true, renders as link. If false, renders as plain span */
+  asLink?: boolean;
+  active?: boolean;
+}
+
+const {
+  tag,
+  count,
+  section = "docs",
+  crossSection = false,
+  asLink = true,
+  active = false,
+} = Astro.props;
+
+// Slugified URL for the cross-section tag page: /tags/[slug]
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const tagSearchHref = `/tags/${slugify(tag)}`;
+const sectionHref = `/${section}?tag=${encodeURIComponent(tag)}`;
+const href = crossSection ? tagSearchHref : sectionHref;
+
+const tooltip = crossSection
+  ? `Explore all results across docs, blog & showcase for #${tag} →`
+  : count != null
+  ? `${count} ${count === 1 ? "result" : "results"} tagged "${tag}"`
+  : `Filter by "${tag}"`;
+---
+
+{asLink ? (
+  <a
+    href={href}
+    data-tag={tag}
+    data-section={section}
+    class:list={[
+      "tag-badge relative inline-flex items-center px-2 py-0.5 text-[11px] font-medium",
+      "transition-all duration-150 cursor-pointer select-none no-underline",
+      active
+        ? "bg-primary text-primary-foreground border border-primary"
+        : "bg-muted text-muted-foreground border border-border/50 hover:border-primary/50 hover:text-foreground hover:bg-muted/80",
+    ]}
+    aria-label={tooltip}
+  >
+    #{tag}
+    {/* Tooltip — strictly scoped to .tag-badge:hover so parent card hover never triggers it */}
+    <span
+      class="tag-tooltip pointer-events-none absolute bottom-full left-1/2 mb-1.5 whitespace-nowrap
+        px-2.5 py-1 text-[10px] font-medium bg-popover text-popover-foreground border border-border/80
+        shadow-md z-50 rounded-xs"
+      role="tooltip"
+    >
+      {tooltip}
+      <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-border/80" />
+    </span>
+  </a>
+) : (
+  <span
+    data-tag={tag}
+    class:list={[
+      "tag-badge relative inline-flex items-center px-2 py-0.5 text-[11px] font-medium",
+      "transition-all duration-150 cursor-pointer select-none",
+      active
+        ? "bg-primary text-primary-foreground border border-primary"
+        : "bg-muted text-muted-foreground border border-border/50 hover:border-primary/50 hover:text-foreground hover:bg-muted/80",
+    ]}
+    aria-label={tooltip}
+  >
+    #{tag}
+    {count != null && (
+      <span
+        class="tag-tooltip pointer-events-none absolute bottom-full left-1/2 mb-1.5 whitespace-nowrap
+          px-2.5 py-1 text-[10px] font-medium bg-popover text-popover-foreground border border-border/80
+          shadow-md z-50 rounded-xs"
+        role="tooltip"
+      >
+        {tooltip}
+        <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-border/80" />
+      </span>
+    )}
+  </span>
+)}
+
+<style>
+  /*
+   * Tooltip visibility is strictly scoped to hovering or focusing the tag badge itself.
+   * Hovering parent cards or ancestor elements will NEVER trigger this tooltip.
+   */
+  .tag-tooltip {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(3px);
+    transition: opacity 140ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 140ms cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 140ms;
+    transition-delay: 0ms;
+  }
+
+  .tag-badge:hover .tag-tooltip,
+  .tag-badge:focus-visible .tag-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    transition-delay: 220ms; /* Deliberate delay to prevent accidental activation during card browsing */
+  }
+</style>

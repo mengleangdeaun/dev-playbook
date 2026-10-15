@@ -4,6 +4,7 @@ description: "How switching from heavy single-page apps to Astro's content layer
 pubDate: 2026-10-10
 author: "Mengleang Deaun"
 tags: ["Astro", "Performance", "Architecture", "WebDev"]
+image: "/assets/images/blog/astro-migration.svg"
 ---
 
 # Why We Migrated Our Internal Docs and Playbook to Astro

@@ -1,0 +1,80 @@
+---
+interface Props {
+  markdown: string;
+  class?: string;
+}
+
+const { markdown, class: className = "" } = Astro.props;
+// Safely encode the markdown so it can be embedded in a data attribute
+// btoa with UTF-8 support (no Buffer / Node types needed)
+const encoded = btoa(unescape(encodeURIComponent(markdown)));
+---
+
+<button
+  id="copy-markdown-btn"
+  data-md={encoded}
+  title="Copy page as Markdown"
+  aria-label="Copy page as Markdown"
+  class:list={[
+    "group relative inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium",
+    "border border-border/70 bg-muted/40 text-muted-foreground",
+    "hover:border-primary/50 hover:bg-muted hover:text-foreground",
+    "transition-all duration-150 cursor-pointer select-none",
+    className,
+  ]}
+>
+  {/* Default: clipboard icon */}
+  <span id="cmb-icon-default" class="flex items-center gap-1.5">
+    <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+      />
+    </svg>
+    Copy Markdown
+  </span>
+
+  {/* Copied state */}
+  <span id="cmb-icon-copied" class="hidden flex items-center gap-1.5 text-primary">
+    <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    Copied!
+  </span>
+</button>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById("copy-markdown-btn");
+    if (!btn) return;
+
+    const iconDefault = document.getElementById("cmb-icon-default");
+    const iconCopied = document.getElementById("cmb-icon-copied");
+
+    btn.addEventListener("click", async () => {
+      try {
+        const encoded = btn.getAttribute("data-md") || "";
+        const text = decodeURIComponent(
+          atob(encoded)
+            .split("")
+            .map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0"))
+            .join("")
+        );
+        await navigator.clipboard.writeText(text);
+
+        // Toggle to "Copied!" state
+        iconDefault.classList.add("hidden");
+        iconCopied.classList.remove("hidden");
+
+        setTimeout(() => {
+          iconDefault.classList.remove("hidden");
+          iconCopied.classList.add("hidden");
+        }, 2000);
+      } catch (err) {
+        console.error("Copy failed:", err);
+      }
+    });
+  })();
+</script>

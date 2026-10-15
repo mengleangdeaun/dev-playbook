@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="env-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="60%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+    <radialGradient id="env-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#env-bg)"/>
+  <circle cx="850" cy="300" r="320" fill="url(#env-glow)"/>
+
+  <!-- Terminal Graphic on Right -->
+  <g transform="translate(600, 100)">
+    <rect width="500" height="420" rx="16" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+    <rect width="500" height="45" rx="16" fill="#1e293b"/>
+    <circle cx="25" cy="22" r="6" fill="#ef4444"/>
+    <circle cx="45" cy="22" r="6" fill="#f59e0b"/>
+    <circle cx="65" cy="22" r="6" fill="#10b981"/>
+    <text x="95" y="27" font-family="monospace" font-size="12" fill="#64748b">bash - dev-playbook onboarding</text>
+
+    <!-- Terminal Lines -->
+    <text x="30" y="85" font-family="monospace" font-size="14" fill="#38bdf8">$ node -v &amp;&amp; pnpm -v</text>
+    <text x="30" y="115" font-family="monospace" font-size="14" fill="#4ade80">v24.13.1 • pnpm v10.5.2</text>
+    
+    <text x="30" y="165" font-family="monospace" font-size="14" fill="#38bdf8">$ git config --get user.signingkey</text>
+    <text x="30" y="195" font-family="monospace" font-size="14" fill="#cbd5e1">ssh-ed25519 [GPG Verified ✓]</text>
+
+    <text x="30" y="245" font-family="monospace" font-size="14" fill="#38bdf8">$ code --install-extension biomejs.biome</text>
+    <text x="30" y="275" font-family="monospace" font-size="14" fill="#a78bfa">Extension successfully installed.</text>
+
+    <rect x="30" y="325" width="440" height="55" rx="10" fill="#1e293b" fill-opacity="0.8"/>
+    <text x="45" y="358" font-family="monospace" font-size="13" fill="#22c55e">✓ Zero-lag local environment verified.</text>
+  </g>
+
+  <!-- Left Content -->
+  <g transform="translate(100, 160)">
+    <rect x="0" y="0" width="160" height="34" rx="17" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-opacity="0.4"/>
+    <circle cx="18" cy="17" r="5" fill="#3b82f6"/>
+    <text x="34" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#60a5fa" letter-spacing="1.5">ONBOARDING</text>
+    <text x="0" y="85" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#f8fafc" letter-spacing="-1">Developer Environment</text>
+    <text x="0" y="135" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800" fill="#60a5fa" letter-spacing="-1">Setup Guide</text>
+    <text x="0" y="190" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" fill="#94a3b8">Node, Git ssh signing, VS Code extensions, and biome standards.</text>
+  </g>
+</svg>

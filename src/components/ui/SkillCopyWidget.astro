@@ -1,0 +1,131 @@
+---
+interface Props {
+  skillName: string;
+  skillDescription?: string;
+  skillBody: string;
+  /** 'toc' = compact TOC rail widget, 'mobile' = full-width accordion */
+  variant?: "toc" | "mobile";
+}
+
+const {
+  skillName,
+  skillDescription,
+  skillBody,
+  variant = "toc",
+} = Astro.props;
+
+const encoded = btoa(unescape(encodeURIComponent(skillBody)));
+const lineCount = skillBody.split("\n").length;
+---
+
+{variant === "toc" ? (
+  /* ─── TOC Rail Widget ─── */
+  <div class="mt-6 pt-4 border-t border-border/60" id="skill-widget">
+    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.347.347A3.75 3.75 0 0114.25 18v1.5a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75V18a3.75 3.75 0 01-1.068-2.654l-.347-.347z"
+        />
+      </svg>
+      AI Skill
+    </h4>
+    <p class="text-[11px] text-muted-foreground leading-snug mb-3 line-clamp-2">
+      {skillDescription || `Use this ${skillName} skill in your AI assistant.`}
+    </p>
+    <div class="text-[10px] text-muted-foreground/60 mb-2.5">{lineCount} lines</div>
+    <button
+      type="button"
+      data-skill-encoded={encoded}
+      data-skill-variant="toc"
+      class="skill-copy-btn w-full flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold
+        border border-primary/30 bg-primary/5 text-primary
+        hover:bg-primary/10 hover:border-primary/60
+        transition-all duration-150 cursor-pointer"
+    >
+      <span class="skill-btn-default flex items-center gap-1.5">
+        <svg class="w-3 h-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        Copy Skill
+      </span>
+      <span class="skill-btn-copied hidden text-primary">✓ Copied!</span>
+    </button>
+  </div>
+) : (
+  /* ─── Mobile Accordion ─── */
+  <details class="group mt-6 border border-border/60 bg-muted/20" id="skill-widget-mobile">
+    <summary class="flex items-center justify-between gap-2 px-4 py-3 cursor-pointer list-none select-none
+      text-sm font-semibold text-foreground hover:bg-muted/40 transition-colors">
+      <span class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.347.347A3.75 3.75 0 0114.25 18v1.5a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75V18a3.75 3.75 0 01-1.068-2.654l-.347-.347z"
+          />
+        </svg>
+        AI Skill — {skillName}
+      </span>
+      <svg class="w-4 h-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </summary>
+    <div class="px-4 pb-4">
+      {skillDescription && (
+        <p class="text-sm text-muted-foreground mb-4 leading-relaxed">{skillDescription}</p>
+      )}
+      <div class="bg-muted/60 border border-border/60 p-3 max-h-48 overflow-y-auto text-xs font-mono text-muted-foreground whitespace-pre-wrap leading-relaxed mb-3">
+        {skillBody.slice(0, 600)}{skillBody.length > 600 ? "\n\n…(truncated — copy for full content)" : ""}
+      </div>
+      <button
+        type="button"
+        data-skill-encoded={encoded}
+        data-skill-variant="mobile"
+        class="skill-copy-btn w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold
+          border border-primary/40 bg-primary/10 text-primary
+          hover:bg-primary/20 hover:border-primary
+          transition-all duration-150 cursor-pointer"
+      >
+        <span class="skill-btn-default flex items-center gap-1.5">
+          <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          Copy Full Skill ({lineCount} lines)
+        </span>
+        <span class="skill-btn-copied hidden">✓ Copied to clipboard!</span>
+      </button>
+    </div>
+  </details>
+)}
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll(".skill-copy-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        try {
+          const encoded = btn.getAttribute("data-skill-encoded") || "";
+          const text = decodeURIComponent(
+            atob(encoded)
+              .split("")
+              .map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0"))
+              .join("")
+          );
+          await navigator.clipboard.writeText(text);
+
+          const defEl = btn.querySelector(".skill-btn-default");
+          const copiedEl = btn.querySelector(".skill-btn-copied");
+          if (defEl) defEl.classList.add("hidden");
+          if (copiedEl) copiedEl.classList.remove("hidden");
+
+          setTimeout(() => {
+            if (defEl) defEl.classList.remove("hidden");
+            if (copiedEl) copiedEl.classList.add("hidden");
+          }, 2000);
+        } catch (err) {
+          console.error("Skill copy failed:", err);
+        }
+      });
+    });
+  })();
+</script>

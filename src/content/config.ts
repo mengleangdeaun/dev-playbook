@@ -12,6 +12,21 @@ const docs = defineCollection({
     tags: z.array(z.string()).default([]),
     author: z.string().optional(),
     lastUpdated: z.string().optional(),
+    pubDate: z.coerce.date().optional(),
+    /** Slug of the linked skill file in src/content/skill/ */
+    skillFile: z.string().optional(),
+    /** Relative path to a cover/hero image (co-located in the doc folder) */
+    cover: z.string().optional(),
+    /** Downloadable file attachments */
+    assets: z
+      .array(
+        z.object({
+          label: z.string(),
+          file: z.string(),
+          size: z.string().optional(),
+        })
+      )
+      .default([]),
   }),
 });
 
@@ -48,6 +63,15 @@ const showcase = defineCollection({
     link: z.string().optional(),
     image: z.string().optional(),
     featured: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+const skill = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/skill" }),
+  schema: z.object({
+    name: z.string(),
+    description: z.string().optional(),
   }),
 });
 
@@ -56,4 +80,5 @@ export const collections = {
   "brand-guide": brandGuide,
   blog,
   showcase,
+  skill,
 };
