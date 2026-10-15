@@ -9,246 +9,326 @@ const allShowcase = await getCollection("showcase");
 
 // Sort blog posts for recent updates
 allBlog.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-const recentPosts = allBlog.slice(0, 2);
+const recentPosts = allBlog.slice(0, 3);
+
+const pillars = [
+  {
+    title: "Core Technical Docs",
+    href: "/docs",
+    count: `${allDocs.length} Docs`,
+    cta: "Browse Docs",
+    accentBar: "group-hover:bg-primary",
+    accentText: "text-primary",
+    badgeBg: "bg-primary/10 text-primary border-primary/20",
+    description:
+      "Framework matrix (Vite vs Next vs Astro), colocation patterns, the 200-line rule, and PR checklists.",
+    icon: `<path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.75" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />`,
+  },
+  {
+    title: "Brand Guidelines",
+    href: "/brand",
+    count: `${allBrand.length} Guides`,
+    cta: "Explore Identity",
+    accentBar: "group-hover:bg-amber-500",
+    accentText: "text-amber-500",
+    badgeBg: "bg-amber-500/10 text-amber-500 border-amber-500/20",
+    description:
+      "Perceptual OKLCH palette tokens, typography scales, Khmer fonts, and vector assets.",
+    icon: `<path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.75" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />`,
+  },
+  {
+    title: "Tech Blog",
+    href: "/blog",
+    count: `${allBlog.length} Posts`,
+    cta: "Read Articles",
+    accentBar: "group-hover:bg-sky-500",
+    accentText: "text-sky-500",
+    badgeBg: "bg-sky-500/10 text-sky-500 border-sky-500/20",
+    description:
+      "Deep dives, migration retrospectives, code-splitting tips, and engineering reflections.",
+    icon: `<path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.75" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />`,
+  },
+  {
+    title: "Project Showcase",
+    href: "/showcase",
+    count: `${allShowcase.length} Projects`,
+    cta: "View Projects",
+    accentBar: "group-hover:bg-indigo-500",
+    accentText: "text-indigo-500",
+    badgeBg: "bg-indigo-500/10 text-indigo-500 border-indigo-500/20",
+    description:
+      "Real-world apps and internal systems built adhering to our playbook standards.",
+    icon: `<path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.75" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />`,
+  },
+];
+
+const frameworkMatrix = [
+  {
+    stack: "React (Vite SPA)",
+    target: "Authenticated apps, internal portals, and dashboards behind login.",
+    rendering: "Client CSR + TanStack Query",
+  },
+  {
+    stack: "Next.js (App Router)",
+    target: "Public SaaS, dynamic marketplaces, and rich SEO needs.",
+    rendering: "Hybrid RSC + SSR",
+  },
+  {
+    stack: "Astro",
+    target: "High-speed documentation, blogs, and marketing sites.",
+    rendering: "Zero-JS Static + Islands",
+  },
+];
 ---
 
 <BaseLayout
   title="Dev Playbook | Engineering Standards & Architecture"
   description="The living developer playbook, architecture decision trees, brand guidelines, and engineering standards."
 >
-  <main class="relative overflow-hidden">
-    {/* Subtle Background Glows */}
-    <div class="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center opacity-40 dark:opacity-20">
-      <div class="h-[550px] w-[550px] -full bg-linear-to-tr from-teal-400 via-emerald-500 to-sky-600 blur-[130px]"></div>
-    </div>
-
+  <main class="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary">
     {/* Hero Section */}
-    <section class="mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:px-8 text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 -full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 backdrop-blur mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
-        <span class="w-2 h-2 -full bg-primary animate-pulse"></span>
-        <span>Version 1.0 • Living Architecture &amp; Brand Standards</span>
-      </div>
+    <section class="border-b border-border">
+      <div class="mx-auto max-w-7xl px-4 pt-16 pb-16 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+          <div class="lg:col-span-8">
+            <h1 class="text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl sm:leading-[1.08]">
+              Build Fast. Ship Clean. <br />
+              <span class="text-primary">Stay Resiliently Aligned.</span>
+            </h1>
 
-      <h1 class="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl sm:leading-[1.12]">
-        Build Fast. Ship Clean. <br class="hidden sm:inline" />
-        <span class="bg-linear-to-r from-teal-500 via-emerald-400 to-cyan-500 bg-clip-text text-transparent">
-          Stay Resiliently Aligned.
-        </span>
-      </h1>
+            <p class="mt-6 max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
+              The unified engineering hub for our team. Standardizing framework selection, feature-based project architecture, semantic design tokens, and PR definitions of done.
+            </p>
 
-      <p class="mx-auto mt-6 max-w-2xl text-base sm:text text-muted-foreground leading-relaxed">
-        The unified engineering hub for our team. Standardizing framework selection, feature-based project architecture, semantic design tokens, and PR definitions of done.
-      </p>
+            {/* Action Buttons */}
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="/docs/frontend-developer-playbook"
+                class="group inline-flex items-center gap-3 border border-primary bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <span>Open Frontend Playbook</span>
+                <svg
+                  class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
 
-      {/* Hero Action Buttons */}
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a
-          href="/docs/frontend-developer-playbook"
-          class="inline-flex items-center gap-2 px-6 py-3 -xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-95 transition-all hover:scale-[1.02]"
-        >
-          <span>Open Frontend Playbook</span>
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
+              <a
+                href="/brand/colors"
+                class="group inline-flex items-center gap-3 border border-border/50 bg-card/50 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-border hover:bg-muted/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <svg
+                  class="h-4 w-4 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+                <span>Brand Guidelines</span>
+              </a>
+            </div>
+          </div>
 
-        <a
-          href="/brand/colors"
-          class="inline-flex items-center gap-2 px-6 py-3 -xl bg-card border border-border text-foreground font-semibold text-sm hover:bg-muted/60 transition-all hover:scale-[1.02]"
-        >
-          <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-          </svg>
-          <span>Brand Guidelines</span>
-        </a>
-      </div>
-
-      {/* Quick Stats Banner */}
-      <div class="mx-auto mt-16 max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 -2xl border border-border/80 bg-card/60 backdrop-blur">
-        <div class="p-3 text-center">
-          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allDocs.length}</div>
-          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Core Docs &amp; Guides</div>
+          {/* Right Column: PR Standards Summary */}
+          <div class="lg:col-span-4 border border-border/40 bg-card/40 p-5">
+            <div class="flex items-center justify-between border-b border-border/40 pb-3 mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-foreground">
+                Core Standards
+              </span>
+              <span class="text-[11px] font-semibold text-emerald-500 bg-emerald-500/10 px-2 py-0.5">
+                Active
+              </span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-muted-foreground">
+              <li class="flex items-center justify-between py-1 border-b border-border/30">
+                <span>Max Component Size</span>
+                <span class="font-mono text-foreground font-semibold">&le; 200 Lines</span>
+              </li>
+              <li class="flex items-center justify-between py-1 border-b border-border/30">
+                <span>Type Safety</span>
+                <span class="font-mono text-foreground font-semibold">Strict TS + Zod</span>
+              </li>
+              <li class="flex items-center justify-between py-1 border-b border-border/30">
+                <span>Required UI States</span>
+                <span class="font-mono text-foreground font-semibold">Load / Empty / Err / OK</span>
+              </li>
+              <li class="flex items-center justify-between py-1">
+                <span>Color Tokens</span>
+                <span class="font-mono text-foreground font-semibold">Semantic OKLCH</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="p-3 text-center border-l border-border/60">
-          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allBrand.length}</div>
-          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Brand Guides</div>
-        </div>
-        <div class="p-3 text-center border-l border-border/60">
-          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allBlog.length}</div>
-          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Articles &amp; Retros</div>
-        </div>
-        <div class="p-3 text-center border-l border-border/60">
-          <div class="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">{allShowcase.length}</div>
-          <div class="text-xs text-muted-foreground mt-0.5 font-medium">Project Showcases</div>
+
+        {/* Quick Stats Banner */}
+        <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 border border-border/40 bg-card/40 divide-y sm:divide-y-0 sm:divide-x divide-border/40">
+          <div class="p-5">
+            <div class="text-3xl font-extrabold font-mono text-foreground">{allDocs.length}</div>
+            <div class="text-xs font-medium text-muted-foreground mt-1">Core Docs &amp; Guides</div>
+          </div>
+          <div class="p-5">
+            <div class="text-3xl font-extrabold font-mono text-foreground">{allBrand.length}</div>
+            <div class="text-xs font-medium text-muted-foreground mt-1">Brand Guides</div>
+          </div>
+          <div class="p-5">
+            <div class="text-3xl font-extrabold font-mono text-foreground">{allBlog.length}</div>
+            <div class="text-xs font-medium text-muted-foreground mt-1">Articles &amp; Retros</div>
+          </div>
+          <div class="p-5">
+            <div class="text-3xl font-extrabold font-mono text-foreground">{allShowcase.length}</div>
+            <div class="text-xs font-medium text-muted-foreground mt-1">Project Showcases</div>
+          </div>
         </div>
       </div>
     </section>
 
     {/* The 4 Main Pillars Section */}
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="text-xs font-bold uppercase tracking-wider text-primary">Playbook Architecture</h2>
-        <p class="text-3xl font-extrabold text-foreground mt-2 tracking-tight">Four Pillars of Engineering</p>
-        <p class="text-sm text-muted-foreground mt-2">Everything you need to ship world-class software at high velocity.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Card 1: Docs */}
-        <a
-          href="/docs"
-          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-primary/50 transition-all flex flex-col justify-between"
-        >
+    <section class="border-b border-border py-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
-            <div class="w-10 h-10 -xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <h3 class="text font-bold text-foreground group-hover:text-primary transition-colors">
-              Core Technical Docs
-            </h3>
-            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
-              Framework matrix (Vite vs Next vs Astro), colocation patterns, 200-line rule, and PR checklists.
+            <h2 class="text-xs font-bold uppercase tracking-wider text-primary">
+              Playbook Architecture
+            </h2>
+            <p class="text-2xl sm:text-3xl font-extrabold text-foreground mt-1 tracking-tight">
+              Four Pillars of Engineering
             </p>
           </div>
-          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-primary">
-            <span>Browse {allDocs.length} Docs</span>
-            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </a>
+          <p class="text-sm text-muted-foreground max-w-md">
+            Everything you need to ship world-class software at high velocity.
+          </p>
+        </div>
 
-        {/* Card 2: Brand Guide */}
-        <a
-          href="/brand"
-          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-amber-500/50 transition-all flex flex-col justify-between"
-        >
-          <div>
-            <div class="w-10 h-10 -xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-              </svg>
-            </div>
-            <h3 class="text font-bold text-foreground group-hover:text-amber-500 transition-colors">
-              Brand Guidelines
-            </h3>
-            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
-              Perceptual OKLCH palette tokens, typography scales, Khmer fonts, and vector assets.
-            </p>
-          </div>
-          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-amber-500">
-            <span>Explore Identity</span>
-            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </a>
+        {/* 4-Column Flush Grid */}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-border/40 bg-card/40 divide-y md:divide-y-0 md:divide-x divide-border/40">
+          {pillars.map((pillar) => (
+            <a
+              href={pillar.href}
+              class="group relative flex flex-col justify-between p-6 transition-colors hover:bg-muted/25 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary"
+            >
+              <div class={`absolute inset-x-0 top-0 h-0.5 bg-transparent transition-colors ${pillar.accentBar}`} />
 
-        {/* Card 3: Tech Blog */}
-        <a
-          href="/blog"
-          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-sky-500/50 transition-all flex flex-col justify-between"
-        >
-          <div>
-            <div class="w-10 h-10 -xl bg-sky-500/10 text-sky-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-              </svg>
-            </div>
-            <h3 class="text font-bold text-foreground group-hover:text-sky-500 transition-colors">
-              Tech Blog
-            </h3>
-            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
-              Deep dives, migration retrospectives, code-splitting tips, and engineering reflections.
-            </p>
-          </div>
-          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-sky-500">
-            <span>Read {allBlog.length} Posts</span>
-            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </a>
+              <div>
+                <div class="flex items-center justify-between mb-5">
+                  <div class={`w-10 h-10 border flex items-center justify-center ${pillar.badgeBg}`}>
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      set:html={pillar.icon}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span class="text-xs font-medium text-muted-foreground border border-border/40 px-2 py-0.5 bg-background/60">
+                    {pillar.count}
+                  </span>
+                </div>
 
-        {/* Card 4: Showcase */}
-        <a
-          href="/showcase"
-          class="group border border-border/80 bg-card/70 backdrop-blur-sm -2xl p-6 hover:border-indigo-500/50  transition-all flex flex-col justify-between"
-        >
-          <div>
-            <div class="w-10 h-10 -xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-            </div>
-            <h3 class="text font-bold text-foreground group-hover:text-indigo-500 transition-colors">
-              Project Showcase
-            </h3>
-            <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
-              Real-world apps and internal systems built adhering to our playbook standards.
-            </p>
-          </div>
-          <div class="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-indigo-500">
-            <span>View Projects</span>
-            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </a>
+                <h3 class="text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                  {pillar.title}
+                </h3>
+
+                <p class="text-xs text-muted-foreground mt-2 leading-relaxed">
+                  {pillar.description}
+                </p>
+              </div>
+
+              <div class="mt-8 pt-4 border-t border-border/40 flex items-center justify-between text-xs font-semibold">
+                <span class={pillar.accentText}>{pillar.cta}</span>
+                <svg
+                  class={`w-4 h-4 transition-transform group-hover:translate-x-1 ${pillar.accentText}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
 
     {/* Decision Matrix Teaser Section */}
-    <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <div class="-3xl border border-border bg-linear-to-b from-card to-background p-6 sm:p-10">
-        <div class="flex flex-col lg:flex-row gap-8 items-start justify-between">
-          <div class="max-w-xl">
-            <span class="text-xs font-bold uppercase tracking-wider text-primary">Key Standard</span>
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-foreground mt-2">
-              The 30-Second Framework Decision Rule
-            </h3>
-            <p class="text-sm text-muted-foreground mt-3 leading-relaxed">
-              Never choose frameworks based on hype or resume building. Match your exact architectural requirement with the proven toolchain:
-            </p>
+    <section class="border-b border-border py-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary">
+            Key Standard
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-foreground mt-1 tracking-tight">
+            The 30-Second Framework Decision Rule
+          </h2>
+          <p class="text-sm text-muted-foreground mt-1">
+            Never choose frameworks based on hype or resume building. Match your exact architectural requirement with the proven toolchain.
+          </p>
+        </div>
 
-            <ul class="mt-6 space-y-3 text-xs sm:text-sm text-muted-foreground">
-              <li class="flex items-start gap-2.5">
-                <span class="w-5 h-5  bg-teal-500/10 text-teal-500 flex items-center justify-center shrink-0 font-bold">✓</span>
-                <span><strong class="text-foreground">React (Vite SPA)</strong>: The default for authenticated apps, internal portals, and dashboards behind login.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="w-5 h-5  bg-teal-500/10 text-teal-500 flex items-center justify-center shrink-0 font-bold">✓</span>
-                <span><strong class="text-foreground">Next.js (App Router)</strong>: The default for public SaaS, dynamic marketplaces, and rich SEO needs.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="w-5 h-5  bg-teal-500/10 text-teal-500 flex items-center justify-center shrink-0 font-bold">✓</span>
-                <span><strong class="text-foreground">Astro</strong>: The default for high-speed documentation, blogs, and marketing sites with Zero-JS by default.</span>
-              </li>
-            </ul>
+        <div class="grid grid-cols-1 lg:grid-cols-12 border border-border/40 bg-card/40 divide-y lg:divide-y-0 lg:divide-x divide-border/40">
+          {/* Left 7 Columns: Framework Matrix */}
+          <div class="lg:col-span-7 flex flex-col justify-between">
+            <div class="divide-y divide-border/40">
+              <div class="grid grid-cols-12 bg-muted/30 px-5 py-3 text-xs font-semibold text-muted-foreground">
+                <div class="col-span-4">Framework</div>
+                <div class="col-span-5">Best For</div>
+                <div class="col-span-3 text-right">Rendering</div>
+              </div>
 
-            <div class="mt-8">
+              {frameworkMatrix.map((row) => (
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 px-5 py-4 items-start sm:items-center hover:bg-muted/20 transition-colors">
+                  <div class="sm:col-span-4 font-bold text-xs text-foreground flex items-center gap-2">
+                    <span class="h-2 w-2 bg-primary inline-block shrink-0"></span>
+                    {row.stack}
+                  </div>
+                  <div class="sm:col-span-5 text-xs text-muted-foreground leading-relaxed">
+                    {row.target}
+                  </div>
+                  <div class="sm:col-span-3 sm:text-right">
+                    <span class="inline-block border border-border/40 bg-background/60 px-2 py-1 font-mono text-[11px] text-foreground">
+                      {row.rendering}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="border-t border-border/40 bg-muted/15 px-5 py-4 flex items-center justify-between">
               <a
                 href="/docs/frontend-developer-playbook#1-framework-selection-matrix"
-                class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                class="group inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline"
               >
-                Read Framework Matrix in Detail
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <span>Read Framework Matrix in Detail</span>
+                <svg
+                  class="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </a>
             </div>
           </div>
 
-          {/* Code Highlight Snapshot */}
-          <div class="w-full lg:w-96 -2xl border border-border bg-muted/40 p-5 font-mono text-xs">
-            <div class="flex items-center gap-1.5 pb-3 border-b border-border text-muted-foreground text-[11px]">
-              <span class="w-2.5 h-2.5 -full bg-destructive/60"></span>
-              <span class="w-2.5 h-2.5 -full bg-amber-500/60"></span>
-              <span class="w-2.5 h-2.5 -full bg-emerald-500/60"></span>
-              <span class="ml-2">playbook-rules.ts</span>
-            </div>
-            <pre class="pt-4 text-xs leading-relaxed overflow-x-auto text-muted-foreground"><span class="text-purple-400">export const</span> <span class="text-blue-400">coreStandards</span> = &#123;
+          {/* Right 5 Columns: Code Highlight Snapshot */}
+          <div class="lg:col-span-5 bg-muted/20 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b border-border/40 bg-background/50 px-4 py-3 font-mono text-xs text-muted-foreground">
+                <span>playbook-rules.ts</span>
+              </div>
+
+              <pre class="p-5 font-mono text-xs leading-relaxed overflow-x-auto text-muted-foreground"><span class="text-purple-400">export const</span> <span class="text-sky-400">coreStandards</span> = &#123;
   <span class="text-emerald-400">maxComponentLines</span>: <span class="text-amber-400">200</span>,
   <span class="text-emerald-400">strictTypeScript</span>: <span class="text-amber-400">true</span>,
   <span class="text-emerald-400">requireZodValidation</span>: <span class="text-amber-400">true</span>,
@@ -256,9 +336,10 @@ const recentPosts = allBlog.slice(0, 2);
     <span class="text-teal-300">"loading"</span>,
     <span class="text-teal-300">"empty"</span>,
     <span class="text-teal-300">"error"</span>,
-    <span class="text-teal-300">"success"</span>
+    <span class="text-teal-300">"success"</span>,
   ],
 &#125;;</pre>
+            </div>
           </div>
         </div>
       </div>
@@ -266,47 +347,74 @@ const recentPosts = allBlog.slice(0, 2);
 
     {/* Recent Articles Teaser */}
     {recentPosts.length > 0 && (
-      <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-8 pb-3 border-b border-border">
-          <div>
-            <h3 class="text-xl font-bold text-foreground">Latest Engineering Notes</h3>
-            <p class="text-xs text-muted-foreground mt-0.5">Fresh insights from our engineering teams</p>
-          </div>
-          <a href="/blog" class="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
-            All Articles
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {recentPosts.map((post) => (
+      <section class="py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between mb-8 pb-4 border-b border-border/40">
+            <div>
+              <h2 class="text-xl font-bold text-foreground">Latest Engineering Notes</h2>
+              <p class="text-xs text-muted-foreground mt-0.5">Fresh insights from our engineering teams</p>
+            </div>
             <a
-              href={`/blog/${post.id}`}
-              class="group border border-border/80 bg-card -2xl p-6 hover:border-primary/50 transition-all flex flex-col justify-between"
+              href="/blog"
+              class="group inline-flex items-center gap-2 border border-border/40 bg-card/40 px-4 py-2 text-xs font-semibold text-foreground hover:border-primary/60 hover:text-primary transition-colors"
             >
-              <div>
-                <span class="text-xs text-muted-foreground">
-                  {post.data.pubDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                </span>
-                <h4 class="text font-bold text-foreground group-hover:text-primary transition-colors mt-1">
-                  {post.data.title}
-                </h4>
-                {post.data.description && (
-                  <p class="text-xs text-muted-foreground mt-2 line-clamp-2 leading-relaxed">
-                    {post.data.description}
-                  </p>
-                )}
-              </div>
-              <div class="mt-4 pt-3 border-t border-border/40 flex items-center justify-between text-xs font-medium text-primary">
-                <span>Read Article</span>
-                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
+              <span>All Articles</span>
+              <svg
+                class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
-          ))}
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 border border-border/40 bg-card/40 divide-y md:divide-y-0 md:divide-x divide-border/40">
+            {recentPosts.map((post) => (
+              <a
+                href={`/blog/${post.id}`}
+                class="group flex flex-col justify-between p-6 hover:bg-muted/25 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary"
+              >
+                <div>
+                  <time
+                    datetime={post.data.pubDate.toISOString()}
+                    class="text-xs text-muted-foreground"
+                  >
+                    {post.data.pubDate.toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </time>
+
+                  <h3 class="text-base font-bold text-foreground group-hover:text-primary transition-colors mt-1.5 leading-snug">
+                    {post.data.title}
+                  </h3>
+
+                  {post.data.description && (
+                    <p class="text-xs text-muted-foreground mt-2 line-clamp-2 leading-relaxed">
+                      {post.data.description}
+                    </p>
+                  )}
+                </div>
+
+                <div class="mt-6 pt-3 border-t border-border/30 flex items-center justify-between text-xs font-semibold text-primary">
+                  <span>Read Article</span>
+                  <svg
+                    class="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     )}

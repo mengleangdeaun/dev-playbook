@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Search, X, FileText, BookOpen, Palette, Sparkles, ArrowRight } from "lucide-react";
 
 export interface SearchItem {
@@ -17,7 +18,12 @@ export function SearchModal({ items }: SearchModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Keyboard shortcut Ctrl+K / Cmd+K to open
   useEffect(() => {
@@ -100,15 +106,15 @@ export function SearchModal({ items }: SearchModalProps) {
         </kbd>
       </button>
 
-      {isOpen && (
+      {isOpen && mounted && typeof document !== "undefined" && createPortal(
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-150"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="w-full max-w-xl bg-card border border-border -xl shadow-2xl overflow-hidden flex flex-col"
+            className="w-full max-w-xl bg-card border border-border shadow-2xl overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Input Bar */}
@@ -135,7 +141,7 @@ export function SearchModal({ items }: SearchModalProps) {
                   <X className="w-4 h-4" />
                 </button>
               )}
-              <kbd className="text-[10px] font-mono text-muted-foreground px-1.5 py-0.5  border border-border bg-muted/50">
+              <kbd className="text-[10px] font-mono text-muted-foreground px-1.5 py-0.5 border border-border bg-muted/50">
                 ESC
               </kbd>
             </div>
@@ -154,13 +160,13 @@ export function SearchModal({ items }: SearchModalProps) {
                       key={item.url}
                       href={item.url}
                       onMouseEnter={() => setSelectedIndex(index)}
-                      className={`flex items-start gap-3 p-3  text-left transition-colors ${
+                      className={`flex items-start gap-3 p-3 text-left transition-colors ${
                         isSelected
                           ? "bg-primary/10 border border-primary/20 text-foreground"
                           : "hover:bg-muted/60 text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <div className="mt-0.5 shrink-0 p-1  bg-background border border-border">
+                      <div className="mt-0.5 shrink-0 p-1 bg-background border border-border">
                         {getSectionIcon(item.section)}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -168,7 +174,7 @@ export function SearchModal({ items }: SearchModalProps) {
                           <span className="font-medium text-sm text-foreground truncate">
                             {item.title}
                           </span>
-                          <span className="text-[10px] uppercase font-semibold tracking-wider px-1.5 py-0.5  bg-muted text-muted-foreground shrink-0">
+                          <span className="text-[10px] uppercase font-semibold tracking-wider px-1.5 py-0.5 bg-muted text-muted-foreground shrink-0">
                             {item.section}
                           </span>
                         </div>
@@ -200,7 +206,8 @@ export function SearchModal({ items }: SearchModalProps) {
               <span>Dev Playbook Quick Search</span>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

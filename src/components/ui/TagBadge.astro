@@ -42,7 +42,7 @@ const tooltip = crossSection
     data-tag={tag}
     data-section={section}
     class:list={[
-      "tag-badge relative inline-flex items-center px-2 py-0.5 text-[11px] font-medium",
+      "tag-badge relative inline-flex items-center self-start shrink-0 px-2 py-0.5 text-[11px] font-medium",
       "transition-all duration-150 cursor-pointer select-none no-underline",
       active
         ? "bg-primary text-primary-foreground border border-primary"
@@ -55,7 +55,7 @@ const tooltip = crossSection
     <span
       class="tag-tooltip pointer-events-none absolute bottom-full left-1/2 mb-1.5 whitespace-nowrap
         px-2.5 py-1 text-[10px] font-medium bg-popover text-popover-foreground border border-border/80
-        shadow-md z-50 rounded-xs"
+        shadow-md z-50"
       role="tooltip"
     >
       {tooltip}
@@ -66,7 +66,7 @@ const tooltip = crossSection
   <span
     data-tag={tag}
     class:list={[
-      "tag-badge relative inline-flex items-center px-2 py-0.5 text-[11px] font-medium",
+      "tag-badge relative inline-flex items-center self-start shrink-0 px-2 py-0.5 text-[11px] font-medium",
       "transition-all duration-150 cursor-pointer select-none",
       active
         ? "bg-primary text-primary-foreground border border-primary"
@@ -79,7 +79,7 @@ const tooltip = crossSection
       <span
         class="tag-tooltip pointer-events-none absolute bottom-full left-1/2 mb-1.5 whitespace-nowrap
           px-2.5 py-1 text-[10px] font-medium bg-popover text-popover-foreground border border-border/80
-          shadow-md z-50 rounded-xs"
+          shadow-md z-50"
         role="tooltip"
       >
         {tooltip}

@@ -79,25 +79,28 @@ const total = matchDocs.length + matchBlog.length + matchShowcase.length;
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {matchDocs.map((doc: any) => (
-              <a
-                href={`/docs/${doc.id}`}
-                class="group border border-border/70 bg-card p-4 hover:border-primary/50 hover:shadow transition-all"
+              <article
+                class="group border border-border/70 bg-card p-4 hover:border-primary/50 hover:shadow transition-all flex flex-col justify-between"
               >
-                <div class="text-[11px] text-muted-foreground mb-1">{doc.data.category}</div>
-                <h3 class="text-sm font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
-                  {doc.data.title}
-                </h3>
-                {doc.data.description && (
-                  <p class="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
-                    {doc.data.description}
-                  </p>
-                )}
-                <div class="flex flex-wrap gap-1 mt-3">
+                <div>
+                  <div class="text-[11px] text-muted-foreground mb-1">{doc.data.category}</div>
+                  <h3 class="text-sm font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
+                    <a href={`/docs/${doc.id}`} class="hover:underline focus:outline-none">
+                      {doc.data.title}
+                    </a>
+                  </h3>
+                  {doc.data.description && (
+                    <p class="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
+                      {doc.data.description}
+                    </p>
+                  )}
+                </div>
+                <div class="flex flex-wrap items-center gap-1.5 mt-3 pt-3 border-t border-border/40">
                   {doc.data.tags?.map((t: string) => (
                     <TagBadge tag={t} section="docs" asLink={true} active={t === tag} />
                   ))}
                 </div>
-              </a>
+              </article>
             ))}
           </div>
         </section>
@@ -115,27 +118,30 @@ const total = matchDocs.length + matchBlog.length + matchShowcase.length;
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {matchBlog.map((post: any) => (
-              <a
-                href={`/blog/${post.id}`}
-                class="group border border-border/70 bg-card p-4 hover:border-primary/50 hover:shadow transition-all"
+              <article
+                class="group border border-border/70 bg-card p-4 hover:border-primary/50 hover:shadow transition-all flex flex-col justify-between"
               >
-                <div class="text-[11px] text-muted-foreground mb-1">
-                  {post.data.pubDate?.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                <div>
+                  <div class="text-[11px] text-muted-foreground mb-1">
+                    {post.data.pubDate?.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                  </div>
+                  <h3 class="text-sm font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
+                    <a href={`/blog/${post.id}`} class="hover:underline focus:outline-none">
+                      {post.data.title}
+                    </a>
+                  </h3>
+                  {post.data.description && (
+                    <p class="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
+                      {post.data.description}
+                    </p>
+                  )}
                 </div>
-                <h3 class="text-sm font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
-                  {post.data.title}
-                </h3>
-                {post.data.description && (
-                  <p class="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
-                    {post.data.description}
-                  </p>
-                )}
-                <div class="flex flex-wrap gap-1 mt-3">
+                <div class="flex flex-wrap items-center gap-1.5 mt-3 pt-3 border-t border-border/40">
                   {post.data.tags?.map((t: string) => (
                     <TagBadge tag={t} section="blog" asLink={true} active={t === tag} />
                   ))}
                 </div>
-              </a>
+              </article>
             ))}
           </div>
         </section>
@@ -153,25 +159,28 @@ const total = matchDocs.length + matchBlog.length + matchShowcase.length;
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {matchShowcase.map((project: any) => (
-              <a
-                href={`/showcase/${project.id}`}
-                class="group border border-border/70 bg-card p-4 hover:border-primary/50 hover:shadow transition-all"
+              <article
+                class="group border border-border/70 bg-card p-4 hover:border-primary/50 hover:shadow transition-all flex flex-col justify-between"
               >
-                <div class="text-[11px] text-muted-foreground mb-1">{project.data.client || "Internal Project"}</div>
-                <h3 class="text-sm font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
-                  {project.data.title}
-                </h3>
-                {project.data.description && (
-                  <p class="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
-                    {project.data.description}
-                  </p>
-                )}
-                <div class="flex flex-wrap gap-1 mt-3">
+                <div>
+                  <div class="text-[11px] text-muted-foreground mb-1">{project.data.client || "Internal Project"}</div>
+                  <h3 class="text-sm font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
+                    <a href={`/showcase/${project.id}`} class="hover:underline focus:outline-none">
+                      {project.data.title}
+                    </a>
+                  </h3>
+                  {project.data.description && (
+                    <p class="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
+                      {project.data.description}
+                    </p>
+                  )}
+                </div>
+                <div class="flex flex-wrap items-center gap-1.5 mt-3 pt-3 border-t border-border/40">
                   {project.data.tags?.map((t: string) => (
                     <TagBadge tag={t} section="showcase" asLink={true} active={t === tag} />
                   ))}
                 </div>
-              </a>
+              </article>
             ))}
           </div>
         </section>
