@@ -104,7 +104,64 @@ Place a tiny, blocking `<script is:inline>` inside the `<head>` of your `index.h
 
 ---
 
-## 4. Handling Status Badges & Charts in Dark Mode
+## 4. Seamless Theme Switching: Eliminating Component Lag & Flickering
+
+### The Problem
+When toggling themes, developers frequently observe an uncoordinated "flicker" where components change color staggered one after another. This happens because:
+- Some elements have `transition: all`, others have `transition-colors duration-150`, while base canvas containers have no transition.
+- The canvas background changes instantly, while headers, cards, and borders fade over 150–300ms, creating a disjointed visual pop.
+
+### The Solution: The `.theme-switching` Freeze Pattern
+Adopted from high-performance production applications, this pattern temporarily freezes **all CSS transitions across the entire DOM tree** for ~50 milliseconds during the theme toggle.
+
+This forces all colors, borders, shadows, and backgrounds to swap simultaneously in a single unified frame. Once the new theme is rendered, transitions are restored for normal user interactions (such as button `:hover`, `:active`, and focus rings).
+
+#### Step 1: Add the CSS Rule (`src/styles/global.css`)
+```css
+/* Disable all transitions instantly during theme toggle to eliminate color flickering & component-by-component lag */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+```
+
+> **Important**: Avoid putting general background-color transition delays on `body`, `.card`, or container wrappers (e.g. avoid `transition-colors duration-300` on the root layout div), as these will create inconsistent lag against child components.
+
+#### Step 2: Implement the Toggle Handler
+```ts
+const handleToggleTheme = () => {
+  const isDark = document.documentElement.classList.contains("dark");
+  const nextTheme = isDark ? "light" : "dark";
+
+  // 1. Freeze all transitions across the entire DOM tree
+  document.documentElement.classList.add("theme-switching");
+
+  // 2. Synchronously update classes on both <html> and <body>, and set colorScheme
+  if (nextTheme === "dark") {
+    document.documentElement.classList.add("dark");
+    document.body?.classList.add("dark");
+    document.documentElement.style.colorScheme = "dark";
+  } else {
+    document.documentElement.classList.remove("dark");
+    document.body?.classList.remove("dark");
+    document.documentElement.style.colorScheme = "light";
+  }
+
+  // 3. Persist user choice
+  localStorage.setItem("theme", nextTheme);
+
+  // 4. Restore normal user-interaction transitions after the new theme has painted
+  window.setTimeout(() => {
+    document.documentElement.classList.remove("theme-switching");
+  }, 50);
+};
+```
+
+---
+
+## 5. Handling Status Badges & Charts in Dark Mode
 
 Solid status colors that look great on a white background (like `bg-emerald-100 text-emerald-800`) look radioactive and harsh on a dark card.
 
@@ -123,7 +180,7 @@ export function ApprovedBadge() {
 
 ---
 
-## 5. Syncing Theme Mode in React Native (Expo)
+## 6. Syncing Theme Mode in React Native (Expo)
 
 On mobile, ensure three layers stay synchronized when the user toggles between Light, Dark, and System themes:
 

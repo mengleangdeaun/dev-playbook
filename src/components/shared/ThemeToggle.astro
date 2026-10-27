@@ -61,15 +61,31 @@
     updateIcons();
 
     themeToggleBtn?.addEventListener("click", () => {
+      // 1. Freeze all transitions across the entire DOM tree
+      document.documentElement.classList.add("theme-switching");
+
       const isDark = document.documentElement.classList.contains("dark");
-      if (isDark) {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      } else {
+      const nextTheme = isDark ? "light" : "dark";
+
+      // 2. Synchronously update classes on both <html> and <body>, and set colorScheme
+      if (nextTheme === "dark") {
         document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
+        document.body?.classList.add("dark");
+        document.documentElement.style.colorScheme = "dark";
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.body?.classList.remove("dark");
+        document.documentElement.style.colorScheme = "light";
       }
+
+      // 3. Update localStorage and icon state
+      localStorage.setItem("theme", nextTheme);
       updateIcons();
+
+      // 4. Restore normal user-interaction transitions after the new theme has painted
+      window.setTimeout(() => {
+        document.documentElement.classList.remove("theme-switching");
+      }, 50);
     });
   })();
 </script>

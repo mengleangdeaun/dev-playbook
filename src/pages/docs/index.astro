@@ -40,7 +40,7 @@ const allCategories = Object.entries(categoryMap).sort((a, b) => b[1] - a[1]);
     </div>
 
     <!-- Featured Flagship Playbook Spotlight Banner -->
-    <div id="featured-banner" class="mb-12 border border-primary/30 bg-linear-to-br from-primary/10 via-card to-background p-6 sm:p-8 relative overflow-hidden shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <div id="featured-banner" class="mb-12 border border-primary/30 bg-linear-to-br from-primary/10 via-card to-background p-6 sm:p-8 relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7">
         <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider bg-primary/20 text-primary border border-primary/30 mb-3">
           Flagship Playbook
@@ -54,7 +54,7 @@ const allCategories = Object.entries(categoryMap).sort((a, b) => b[1] - a[1]);
         <div class="mt-6 flex flex-wrap items-center gap-3">
           <a
             href="/docs/frontend-developer-playbook"
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 shadow-xs transition-opacity"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
           >
             Read Playbook
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,7 +150,7 @@ const allCategories = Object.entries(categoryMap).sort((a, b) => b[1] - a[1]);
           data-doc-card
           data-category={doc.data.category || "General"}
           data-tags={JSON.stringify(doc.data.tags || [])}
-          class="group border border-border/80 bg-card p-5 hover:border-primary/50 hover:shadow-md transition-all flex flex-col justify-between"
+          class="group border border-border/80 bg-card p-5 hover:border-primary/50 transition-all flex flex-col justify-between"
         >
           <div>
             {doc.data.cover && (

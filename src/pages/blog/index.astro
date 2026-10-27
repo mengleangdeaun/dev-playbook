@@ -84,7 +84,7 @@ const allTags = Object.entries(tagMap).sort((a, b) => b[1] - a[1]);
           <article
             data-blog-card
             data-tags={JSON.stringify(post.data.tags || [])}
-            class="group border border-border/80 bg-card p-6 sm:p-8 hover:border-primary/50 hover:shadow transition-all flex flex-col justify-between"
+            class="group border border-border/80 bg-card p-6 sm:p-8 hover:border-primary/50 transition-all flex flex-col justify-between"
           >
             <div>
               {post.data.image && (

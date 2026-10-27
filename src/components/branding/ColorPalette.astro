@@ -11,7 +11,7 @@ const brandColors: ColorItem[] = [
   {
     name: "Primary / Emerald Teal",
     variable: "--primary",
-    cssVal: "oklch(0.511 0.096 186.391)",
+    cssVal: "oklch(0.511 0.096 186.391) / dark: oklch(0.704 0.14 182.503)",
     textClass: "text-primary-foreground",
     description: "Core brand accent, primary CTA buttons, active links, and focus rings."
   },
@@ -32,21 +32,21 @@ const brandColors: ColorItem[] = [
   {
     name: "Muted Text & Fill",
     variable: "--muted",
-    cssVal: "oklch(0.963 0.002 197.1)",
+    cssVal: "oklch(0.963 0.002 197.1) / dark: oklch(0.275 0.011 216.9)",
     textClass: "text-muted-foreground",
     description: "Subtle backgrounds, table headers, dividers, and disabled states."
   },
   {
     name: "Border & Input",
     variable: "--border",
-    cssVal: "oklch(0.925 0.005 214.3)",
+    cssVal: "oklch(0.925 0.005 214.3) / dark: oklch(1 0 0 / 10%)",
     textClass: "text-foreground",
     description: "Structural borders, cards outlines, and form field boundaries."
   },
   {
     name: "Destructive",
     variable: "--destructive",
-    cssVal: "oklch(0.577 0.245 27.325)",
+    cssVal: "oklch(0.577 0.245 27.325) / dark: oklch(0.704 0.191 22.216)",
     textClass: "text-white",
     description: "Critical warnings, deletion confirmations, and destructive alerts."
   }
@@ -55,7 +55,7 @@ const brandColors: ColorItem[] = [
 
 <div class="my-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 not-prose">
   {brandColors.map((color) => (
-    <div class="group border border-border/80 -xl overflow-hidden bg-card/60 backdrop-blur-sm shadow-xs hover:border-primary/50 transition-all hover:shadow">
+    <div class="group border border-border/80 -xl overflow-hidden bg-card/60 backdrop-blur-sm hover:border-primary/50 transition-all">
       <div 
         class="h-24 w-full flex items-end p-3 transition-transform group-hover:scale-[1.02]"
         style={`background-color: var(${color.variable});`}
